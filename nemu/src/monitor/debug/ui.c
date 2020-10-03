@@ -49,18 +49,21 @@ static int cmd_Sstep(char* args){
 		printf("N should be positive\n");
 		return 0;
 	}
-	cpu_exec(num);
+	int i = 0;
+	for(;i < num; i ++){
+		cpu_exec(1);
+	}
 	return 0;
 }
 
 static int cmd_info(char* args){
 	char* token = strtok(args," ");
 	if (token == NULL){
-		printf("just one parameter. Mismatch the format [info r]");
+		printf("just one parameter. Mismatch the format [info r]\n");
 		return 0;
 	}
 	if (strtok(NULL, " ") != NULL){
-		printf("too many parameters. Mismatch the format");
+		printf("too many parameters. Mismatch the format\n");
 		return 0;
 	}	
 	if (strcmp(token,"r") == 0){
@@ -75,7 +78,7 @@ static int cmd_info(char* args){
 		printf("Value of eip: 0x%x\n", cpu.eip);
 	}
 	else{
-		printf("wrong parameter!");
+		printf("wrong parameter!\n");
 		return 0;
 	}
 	return 0;
