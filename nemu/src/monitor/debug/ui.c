@@ -107,7 +107,7 @@ static int cmd_x(char* args){
 	int i = 0;
 	for (;i < n; i ++)
 	{
-		printf ("0x%x ",swaddr_read (address,4));
+		printf ("0x%08x ",swaddr_read (address,4));
 		address+=4;
 	}
 	printf ("\n");
