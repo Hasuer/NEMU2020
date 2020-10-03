@@ -92,7 +92,7 @@ static int cmd_x(char* args){
 	char* EXPR = strtok(NULL, " "); // get EXPR
 	if(EXPR == NULL){
 		// test if there is only two parameter
-		printf("only two parameter. mismatch the format! [X N EXPR]");
+		printf("only two parameter. mismatch the format! [X N EXPR]\n");
 		return 0;
 	}
 	if(strtok(NULL," ")!=NULL){
@@ -103,11 +103,11 @@ static int cmd_x(char* args){
 	int n;
 	swaddr_t address; 
 	sscanf(args, "%d", &n); //get n
-	sscanf(EXPR, "%d", &address);//get start address
+	sscanf(EXPR, "%x", &address);//get start address
 	int i = 0;
 	for (;i < n; i ++)
 	{
-		printf ("0x%08x ",swaddr_read (address,4));
+		printf ("0x%x ",swaddr_read (address,4));
 		address+=4;
 	}
 	printf ("\n");
