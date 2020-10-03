@@ -44,7 +44,7 @@ static int cmd_Sstep(char* args){
 	}
 	int num ;
 	sscanf(args, "%d", &num);
-//	printf("num = %d\n", num);
+	//	printf("num = %d\n", num);
 	cpu_exec(num);
 	return 0;
 }
@@ -71,10 +71,14 @@ static int cmd_x(char* args){
 		printf("mismatch the format! \n");
 		return 1;
 	}
-	printf("%s", args);
+	printf("args = %s\n", args);
 	int n;
 	sscanf(args, "%d", &n);
-	printf("n = %d", n);
+//	printf("n = %d\n", n);
+	char* EXPR = strtok(NULL, " ");
+	printf("args = %s\n", args);
+	printf("EXPR = %s\n", EXPR);
+
 	return 0;
 }
 static int cmd_help(char *args);
