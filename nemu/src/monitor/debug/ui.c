@@ -43,11 +43,12 @@ static int cmd_Sstep(char* args){
 		return 0;
 	}
 	printf("%s", args);
-	int num ;
-	char command[2];
-	sscanf(args, "%s %d", command, &num);
-	printf("%d", num);
-	cpu_exec(num);
+
+//	int num ;
+//	char command[2];
+//	sscanf(args, "%s %d", command, &num);
+//	printf("%d", num);
+//	cpu_exec(num);
 	return 0;
 }
 
