@@ -45,6 +45,10 @@ static int cmd_Sstep(char* args){
 	int num ;
 	sscanf(args, "%d", &num);
 	//	printf("num = %d\n", num);
+	if (num < 0){
+		printf("N should be positive");
+		return 0;
+	}
 	cpu_exec(num);
 	return 0;
 }
@@ -86,6 +90,15 @@ static int cmd_x(char* args){
 		printf("to many parameters. mismatch the format! [x N EXPR] \n");
 		return 0;
 	}
+
+
+
+
+
+
+
+
+
 
 	return 0;
 }
