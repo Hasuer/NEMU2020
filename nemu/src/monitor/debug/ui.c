@@ -42,7 +42,7 @@ static int cmd_Sstep(char* args){
 		cpu_exec(1);
 		return 0;
 	}
-	token = strtok(NULL, " ");
+	// token = strtok(NULL, " ");
 	int num = atoi(token);
 	cpu_exec(num);
 	return 0;
