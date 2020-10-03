@@ -74,6 +74,10 @@ static int cmd_info(char* args){
 		printf("Value of edi: 0x%x\n", cpu.edi);
 		printf("Value of eip: 0x%x\n", cpu.eip);
 	}
+	else{
+		printf("wrong parameter!");
+		return 0;
+	}
 	return 0;
 }
 
