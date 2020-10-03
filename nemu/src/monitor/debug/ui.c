@@ -44,7 +44,7 @@ static int cmd_Sstep(char* args){
 	}
 	int num ;
 	sscanf(args, "%d", &num);
-	printf("num = %d\n", num);
+//	printf("num = %d\n", num);
 	cpu_exec(num);
 	return 0;
 }
@@ -72,6 +72,9 @@ static int cmd_x(char* args){
 		return 1;
 	}
 	printf("%s", args);
+	int n;
+	sscanf(args, "%d", &n);
+	printf("n = %d", n);
 	return 0;
 }
 static int cmd_help(char *args);
