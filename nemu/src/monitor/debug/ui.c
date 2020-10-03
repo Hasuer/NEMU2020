@@ -49,6 +49,18 @@ static int cmd_Sstep(char* args){
 	return 0;
 }
 
+static int cmd_info(char* args){
+	printf("eax is %x\n", cpu.eax);
+	printf("ecx is %x\n", cpu.ecx);
+	printf("edx is %x\n", cpu.edx);
+	printf("ebx is %x\n", cpu.ebx);
+	printf("esp is %x\n", cpu.esp);
+	printf("ebp is %x\n", cpu.ebp); 
+	printf("esi is %x\n", cpu.esi);
+	printf("edi is %x\n", cpu.edi);
+	return 0;
+
+}
 static int cmd_help(char *args);
 
 static struct {
@@ -62,6 +74,7 @@ static struct {
 
 	/* TODO: Add more commands */
 	{"si", "Single Step", cmd_Sstep},
+	{"info r", "Print the register", cmd_info},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))

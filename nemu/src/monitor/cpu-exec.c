@@ -50,7 +50,6 @@ void cpu_exec(volatile uint32_t n) {
 
 	for(; n > 0; n --) {
 #ifdef DEBUG
-		printf("entered and num = %d", n);
 		
 		swaddr_t eip_temp = cpu.eip;
 		if((n & 0xffff) == 0) {
