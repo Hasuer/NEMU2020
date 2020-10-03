@@ -59,7 +59,7 @@ static int cmd_Sstep(char* args){
 static int cmd_info(char* args){
 	char* token = strtok(args," ");
 	if (token == NULL){
-		printf("just one parameter. Mismatch the format [info r]\n");
+		printf("just one parameter. Mismatch the format [info SUNSMD]\n");
 		return 0;
 	}
 	if (strtok(NULL, " ") != NULL){
@@ -68,7 +68,7 @@ static int cmd_info(char* args){
 	}	
 	if (strcmp(token,"r") == 0){
 		int i = 0;
-		printf("name           value\n");
+		printf("name          value\n");
 		printf("----------------------\n");
 		for(; i < 8; i ++){
 			printf("%s        %d\n", regsl[i], cpu.gpr[i]._32);
