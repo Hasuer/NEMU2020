@@ -42,13 +42,13 @@ static int cmd_Sstep(char* args){
 		cpu_exec(1);
 		return 0;
 	}
-	printf("%s", args);
+//	printf("%s", args);
 
-//	int num ;
+	int num ;
 //	char command[2];
-//	sscanf(args, "%s %d", command, &num);
-//	printf("%d", num);
-//	cpu_exec(num);
+	sscanf(args, "%d", &num);
+	printf("num = %d\n", num);
+	cpu_exec(num);
 	return 0;
 }
 
