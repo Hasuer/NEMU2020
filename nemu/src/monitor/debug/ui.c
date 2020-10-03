@@ -44,7 +44,7 @@ static int cmd_Sstep(char* args){
 	}
 	// token = strtok(NULL, " ");
 	int num = atoi(token);
-
+	printf("%d", num);
 	cpu_exec(num);
 	return 0;
 }
