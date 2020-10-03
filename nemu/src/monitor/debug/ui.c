@@ -50,15 +50,19 @@ static int cmd_Sstep(char* args){
 }
 
 static int cmd_info(char* args){
-	printf("Value of eax: 0x%x\n", cpu.eax);
-	printf("Value of ecx: 0x%x\n", cpu.ecx);
-	printf("Value of edx: 0x%x\n", cpu.edx);
-	printf("Value of ebx: 0x%x\n", cpu.ebx);
-	printf("Value of esp: 0x%x\n", cpu.esp);
-	printf("Value of ebp: 0x%x\n", cpu.ebp); 
-	printf("Value of esi: 0x%x\n", cpu.esi);
-	printf("Value of edi: 0x%x\n", cpu.edi);
-	printf("Value of eip: 0x%x\n", cpu.eip);
+	char* token = strtok(args," ");
+	printf("%s %s", args, token);
+	if (strcmp(args,"r") == 0){
+		printf("Value of eax: 0x%x\n", cpu.eax);
+		printf("Value of ecx: 0x%x\n", cpu.ecx);
+		printf("Value of edx: 0x%x\n", cpu.edx);
+		printf("Value of ebx: 0x%x\n", cpu.ebx);
+		printf("Value of esp: 0x%x\n", cpu.esp);
+		printf("Value of ebp: 0x%x\n", cpu.ebp); 
+		printf("Value of esi: 0x%x\n", cpu.esi);
+		printf("Value of edi: 0x%x\n", cpu.edi);
+		printf("Value of eip: 0x%x\n", cpu.eip);
+	}
 	return 0;
 }
 static int cmd_help(char *args);
