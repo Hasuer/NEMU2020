@@ -42,7 +42,7 @@ static int cmd_Sstep(char* args){
 		cpu_exec(1);
 		return 0;
 	}
-	// token = strtok(NULL, " ");
+	printf("%s", args);
 	int num ;
 	char command[2];
 	sscanf(args, "%s %d", command, &num);
