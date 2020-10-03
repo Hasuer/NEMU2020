@@ -68,16 +68,24 @@ static int cmd_info(char* args){
 static int cmd_x(char* args){
 	char* arg = strtok(args," ");
 	if(arg == NULL){
-		printf("mismatch the format! \n");
+		//test if there is only one parameter
+		printf("only one parameter. mismatch the format! [x N EXPR] \n");
 		return 1;
 	}
 	printf("args = %s\n", args);
 	int n;
-	sscanf(args, "%d", &n);
-//	printf("n = %d\n", n);
-	char* EXPR = strtok(NULL, " ");
-	printf("args = %s\n", args);
-	printf("EXPR = %s\n", EXPR);
+	sscanf(args, "%d", &n); //get n
+	char* EXPR = strtok(NULL, " "); // get EXPR
+	if(EXPR == NULL){
+		// test if there is only two parameter
+		printf("only two parameter. mismatch the format! [X N EXPR]");
+		return 0;
+	}
+	if(strtok(NULL," ")!=NULL){
+		//test if there are more than three  parameter
+		printf("to many parameters. mismatch the format! [x N EXPR] \n");
+		return 0;
+	}
 
 	return 0;
 }
