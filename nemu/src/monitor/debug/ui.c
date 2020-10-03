@@ -46,7 +46,7 @@ static int cmd_Sstep(char* args){
 	sscanf(args, "%d", &num);
 	//	printf("num = %d\n", num);
 	if (num < 0){
-		printf("N should be positive");
+		printf("N should be positive\n");
 		return 0;
 	}
 	cpu_exec(num);
@@ -55,6 +55,14 @@ static int cmd_Sstep(char* args){
 
 static int cmd_info(char* args){
 	char* token = strtok(args," ");
+	if (token == NULL){
+		printf("just one parameter. Mismatch the format [info r]");
+		return 0;
+	}
+	if (strtok(NULL, " ") != NULL){
+		printf("too many parameters. Mismatch the format");
+		return 0;
+	}	
 	if (strcmp(token,"r") == 0){
 		printf("Value of eax: 0x%x\n", cpu.eax);
 		printf("Value of ecx: 0x%x\n", cpu.ecx);
