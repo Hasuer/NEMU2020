@@ -68,8 +68,10 @@ static int cmd_info(char* args){
 	}	
 	if (strcmp(token,"r") == 0){
 		int i = 0;
+		printf("name      value");
+		printf("---------------");
 		for(; i < 8; i ++){
-			printf("%s %d", regsl[i], cpu.gpr[i]._32);
+			printf("%s        %d\n", regsl[i], cpu.gpr[i]._32);
 		}	
 	}
 	else{
