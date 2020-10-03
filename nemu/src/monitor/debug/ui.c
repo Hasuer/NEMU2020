@@ -105,7 +105,7 @@ static int cmd_x(char* args){
 	sscanf(args, "%d", &n); //get n
 	sscanf(EXPR, "%d", &address);//get start address
 	int i = 0;
-	for (;i<=n;i++)
+	for (;i < n; i ++)
 	{
 		printf ("0x%08x ",swaddr_read (address,4));
 		address+=4;
