@@ -71,9 +71,9 @@ static int cmd_info(char* args){
 		printf("name          value\n");
 		printf("----------------------\n");
 		for(; i < 8; i ++){
-			printf("%s        %d\n", regsl[i], cpu.gpr[i]._32);
+			printf("%s        0x%x\n", regsl[i], cpu.gpr[i]._32);
 		}
-		printf("eip        %d\n",  cpu.eip);
+		printf("eip        0x%x\n",  cpu.eip);
 	}
 	else{
 		printf("wrong parameter!\n");
