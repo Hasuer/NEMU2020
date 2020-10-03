@@ -28,7 +28,7 @@ char* rl_gets() {
 }
 
 static int cmd_c(char *args) {
-	cpu_exec(-1);
+	cpu_exec(10);
 	return 0;
 }
 
@@ -42,10 +42,7 @@ static int cmd_Sstep(char* args){
 		cpu_exec(1);
 		return 0;
 	}
-//	printf("%s", args);
-
 	int num ;
-//	char command[2];
 	sscanf(args, "%d", &num);
 	printf("num = %d\n", num);
 	cpu_exec(num);
