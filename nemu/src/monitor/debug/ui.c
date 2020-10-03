@@ -36,6 +36,18 @@ static int cmd_q(char *args) {
 	return -1;
 }
 
+static int cmd_Sstep(char* args){
+	char* token = strtok(args, " ");
+	if (token == NULL){
+		cpu_exec(1);
+		return 0;
+	}
+	token = strtok(NULL, " ");
+	int num = atoi(token);
+	cpu_exec(num);
+	return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -48,7 +60,7 @@ static struct {
 	{ "q", "Exit NEMU", cmd_q },
 
 	/* TODO: Add more commands */
-
+	{"si", "Single Step", cmd_Sstep},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
