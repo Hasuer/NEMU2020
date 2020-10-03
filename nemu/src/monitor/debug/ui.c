@@ -51,8 +51,7 @@ static int cmd_Sstep(char* args){
 
 static int cmd_info(char* args){
 	char* token = strtok(args," ");
-	printf("%s %s", args, token);
-	if (strcmp(args,"r") == 0){
+	if (strcmp(token,"r") == 0){
 		printf("Value of eax: 0x%x\n", cpu.eax);
 		printf("Value of ecx: 0x%x\n", cpu.ecx);
 		printf("Value of edx: 0x%x\n", cpu.edx);
@@ -63,6 +62,16 @@ static int cmd_info(char* args){
 		printf("Value of edi: 0x%x\n", cpu.edi);
 		printf("Value of eip: 0x%x\n", cpu.eip);
 	}
+	return 0;
+}
+
+static int cmd_x(char* args){
+	char* arg = strtok(args," ");
+	if(arg == NULL){
+		printf("mismatch the format! \n");
+		return 1;
+	}
+	printf("%s", args);
 	return 0;
 }
 static int cmd_help(char *args);
@@ -79,6 +88,7 @@ static struct {
 	/* TODO: Add more commands */
 	{"si", "Single Step. si [N] for exectuating N steps, the default N is 1.", cmd_Sstep},
 	{"info", "[info r] to print the register", cmd_info},
+	{"x", "[x N EXPR] to scan the memory", cmd_x},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
