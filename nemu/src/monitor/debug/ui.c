@@ -103,19 +103,17 @@ static int cmd_x(char* args){
 	int n;
 	swaddr_t address; 
 	sscanf(args, "%d", &n); //get n
-	sscanf(EXPR, "%d", &address);
-	printf("%x",address);
-
-
-
-
-
-
-
-
-
+	sscanf(EXPR, "%d", &address);//get start address
+	int i = 0;
+	for (;i<=n;i++)
+	{
+		printf ("0x%08x ",swaddr_read (address,4));
+		address+=4;
+	}
+	printf ("\n");
 	return 0;
 }
+
 static int cmd_help(char *args);
 
 static struct {
