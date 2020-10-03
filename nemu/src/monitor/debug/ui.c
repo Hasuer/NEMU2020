@@ -73,8 +73,8 @@ static struct {
 	{ "q", "Exit NEMU", cmd_q },
 
 	/* TODO: Add more commands */
-	{"si", "Single Step", cmd_Sstep},
-	{"info r", "Print the register", cmd_info},
+	{"si", "Single Step. si [N] for exectuating N steps, the default N is 1.", cmd_Sstep},
+	{"info", "[info r] to print the register", cmd_info},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
