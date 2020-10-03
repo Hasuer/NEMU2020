@@ -43,7 +43,8 @@ static int cmd_Sstep(char* args){
 		return 0;
 	}
 	// token = strtok(NULL, " ");
-	int num = atoi(token);
+	int num ;
+	num = sscanf(token, "%d", &num);
 	printf("%d", num);
 	cpu_exec(num);
 	return 0;
