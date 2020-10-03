@@ -89,9 +89,6 @@ static int cmd_x(char* args){
 		printf("only one parameter. mismatch the format! [x N EXPR] \n");
 		return 1;
 	}
-	printf("args = %s\n", args);
-	int n;
-	sscanf(args, "%d", &n); //get n
 	char* EXPR = strtok(NULL, " "); // get EXPR
 	if(EXPR == NULL){
 		// test if there is only two parameter
@@ -103,8 +100,11 @@ static int cmd_x(char* args){
 		printf("to many parameters. mismatch the format! [x N EXPR] \n");
 		return 0;
 	}
-
-
+	int n;
+	swaddr_t address; 
+	sscanf(args, "%d", &n); //get n
+	sscanf(EXPR, "%d", &address);
+	printf("%x",address);
 
 
 
