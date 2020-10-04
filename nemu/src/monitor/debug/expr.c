@@ -125,6 +125,21 @@ static bool make_token(char *e) {
 
 	return true; 
 }
+
+//check the brackets
+bool check_parentheses(int l ,int r){
+	    int i,tag = 0;
+	        if(tokens[l].type != '(' || tokens[r].type != ')') return false;  
+		    for(i = l ; i <= r ; i ++){    
+			            if(tokens[i].type == '(') tag++;
+				            else if(tokens[i].type == ')') tag--;
+					            if(tag == 0 && i < r) return false ;  
+						        }                              
+		        if( tag != 0 ) return false;   
+			    return true;                   
+} 
+
+
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
 		*success = false;
