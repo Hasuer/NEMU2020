@@ -40,14 +40,18 @@ static int cmd_Sstep(char* args){
 	char* token = strtok(args, " ");
 	if (token == NULL){
 		cpu_exec(1);
-		return 0;
+		return 1;
+	}
+	if (strtok(NULL, " ") != NULL){
+		printf("Too many parameters!");
+		return 1;
 	}
 	int num ;
 	sscanf(args, "%d", &num);
 	//	printf("num = %d\n", num);
 	if (num < 0){
 		printf("N should be positive\n");
-		return 0;
+		return 1;
 	}
 	int i = 0;
 	for(;i < num; i ++){
