@@ -91,6 +91,10 @@ static bool make_token(char *e) {
 
 
 				//append begin
+				/* TODO: Now a new token is recognized with rules[i]. Add codes
+				 * to record the token in the array `tokens'. For certain types
+				 * of tokens, some extra actions should be performed.
+				 */
 				char* temp = e + position + 1;//for REGISTER use,because of removing the '$' ahead of regisiter 
 				switch(rules[i].token_type){
 					case 256:
@@ -102,22 +106,17 @@ static bool make_token(char *e) {
 						tokens[nr_token].str[substr_len - 1] = '\0';
 						nr_token ++;
 						break;
+					default:
+						tokens[nr_token].type = rules[i].token_type;
+						tokens[nr_token].priority = rules[i].priority;
+						strncpy (tokens[nr_token].str, substr_start, substr_len);
+						tokens[nr_token].str[substr_len] = '\0';
+						nr_token ++;
 				}
 				position += substr_len;
-
-				/* TODO: Now a new token is recognized with rules[i]. Add codes
-				 * to record the token in the array `tokens'. For certain types
-				 * of tokens, some extra actions should be performed.
-				 */
-
-				switch(rules[i].token_type) {
-					default: panic("please implement me");
-				}
-
 				break;
 			}
 		}
-
 		if(i == NR_REGEX) {
 			printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
 			return false;
@@ -126,7 +125,6 @@ static bool make_token(char *e) {
 
 	return true; 
 }
-
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
 		*success = false;
@@ -137,4 +135,3 @@ uint32_t expr(char *e, bool *success) {
 	panic("please implement me");
 	return 0;
 }
-
