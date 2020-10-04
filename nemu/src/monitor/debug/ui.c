@@ -43,7 +43,7 @@ static int cmd_Sstep(char* args){
 		return 1;
 	}
 	if (strtok(NULL, " ") != NULL){
-		printf("Too many parameters!");
+		printf("Too many parameters!\n");
 		return 1;
 	}
 	int num ;

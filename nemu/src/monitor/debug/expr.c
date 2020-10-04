@@ -8,7 +8,7 @@
 
 enum {
 	NOTYPE = 256, EQ, NEQ, GE, LE,  AND, OR, MINUS, POINTOR, NUMBER, HEX, REGISTER, MARK,
-		/* TODO: Add more token types */
+	/* TODO: Add more token types */
 };
 
 static struct rule {
@@ -67,6 +67,7 @@ void init_regex() {
 typedef struct token {
 	int type;
 	char str[32];
+	int priority;
 } Token;
 
 Token tokens[32];
@@ -87,6 +88,21 @@ static bool make_token(char *e) {
 				int substr_len = pmatch.rm_eo;
 
 				Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position, substr_len, substr_len, substr_start);
+
+
+				//append begin
+				char* temp = e + position + 1;//for REGISTER use,because of removing the '$' ahead of regisiter 
+				switch(rules[i].token_type){
+					case 256:
+						break;
+					case REGISTER://remove the "$" ahead of the regisiter
+						tokens[nr_token].type = rules[i].token_type;
+						tokens[nr_token].priority = rules[i].priority;
+						strncpy (tokens[nr_token].str, temp, substr_len - 1);
+						tokens[nr_token].str[substr_len - 1] = '\0';
+						nr_token ++;
+						break;
+				}
 				position += substr_len;
 
 				/* TODO: Now a new token is recognized with rules[i]. Add codes
