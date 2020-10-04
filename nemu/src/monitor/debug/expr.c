@@ -7,11 +7,8 @@
 #include <regex.h>
 
 enum {
-NOTYPE = 256, 
-	EQ , NEQ , AND , OR , MINUS , POINTOR , NUMBER , HEX , REGISTER , MARK, GE, LE
-
+	NOTYPE = 256, EQ, NEQ, GE, LE,  AND, OR, MINUS, POINTOR, NUMBER, HEX, REGISTER, MARK,
 		/* TODO: Add more token types */
-
 };
 
 static struct rule {
@@ -25,8 +22,7 @@ static struct rule {
 	 */
 	{"\\b[0-9]+\\b",NUMBER,0},			// number
 	{"\\b0[xX][0-9a-fA-F]+\\b",HEX,0},//hex
-	{"\\$(eax|EAX|ebx|EBX|ecx|ECX|edx|EDX|ebp|EBP|esp|ESP|esi|ESI|edi|EDI|eip|EIP)",REGISTER,0},		// register
-	{"\\$(([ABCD][HLX])|([abcd][hlx]))",REGISTER,0},		// register
+	{"\\$[a-zA-Z]+",REGISTER,0},		// register
 	{"\\b[a-zA-Z_0-9]+" , MARK, 0},		// mark
 	{"!=",NEQ,3},						// not equal	
 	{"!",'!',6},						// not
