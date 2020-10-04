@@ -122,31 +122,32 @@ static bool make_token(char *e) {
 			return false;
 		}
 	}
-
-	return true; 
+return true;
 }
+	//check the brackets
+	bool check_parentheses(int l ,int r){
+		int i,tag = 0;
+		if(tokens[l].type != '(' || tokens[r].type != ')') return false;  
+		for(i = l ; i <= r ; i ++){    
+			if(tokens[i].type == '(') tag++;
+			else if(tokens[i].type == ')') tag--;
+			if(tag == 0 && i < r) return false ;  
+		}                              
+		if( tag != 0 ) return false;   
+		return true;                   
+	} 
 
-//check the brackets
-bool check_parentheses(int l ,int r){
-	    int i,tag = 0;
-	        if(tokens[l].type != '(' || tokens[r].type != ')') return false;  
-		    for(i = l ; i <= r ; i ++){    
-			            if(tokens[i].type == '(') tag++;
-				            else if(tokens[i].type == ')') tag--;
-					            if(tag == 0 && i < r) return false ;  
-						        }                              
-		        if( tag != 0 ) return false;   
-			    return true;                   
-} 
-
-
-uint32_t expr(char *e, bool *success) {
-	if(!make_token(e)) {
-		*success = false;
+	//dominant_oper, return the position of the oper in tokens[]
+	int dominant_operator(int l, int r){
 		return 0;
 	}
+	uint32_t expr(char *e, bool *success) {
+		if(!make_token(e)) {
+			*success = false;
+			return 0;
+		}
 
-	/* TODO: Insert codes to evaluate the expression. */
-	panic("please implement me");
-	return 0;
-}
+		/* TODO: Insert codes to evaluate the expression. */
+		panic("please implement me");
+		return 0;
+	}
