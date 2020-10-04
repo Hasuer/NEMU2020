@@ -7,21 +7,41 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ
+NOTYPE = 256, 
+	EQ , NEQ , AND , OR , MINUS , POINTOR , NUMBER , HEX , REGISTER , MARK, GE, LE
 
-	/* TODO: Add more token types */
+		/* TODO: Add more token types */
 
 };
 
 static struct rule {
 	char *regex;
 	int token_type;
+	int priority;
 } rules[] = {
 
 	/* TODO: Add more rules.
 	 * Pay attention to the precedence level of different rules.
 	 */
-
+	{"\\b[0-9]+\\b",NUMBER,0},			// number
+	{"\\b0[xX][0-9a-fA-F]+\\b",HEX,0},//hex
+	{"\\$(eax|EAX|ebx|EBX|ecx|ECX|edx|EDX|ebp|EBP|esp|ESP|esi|ESI|edi|EDI|eip|EIP)",REGISTER,0},		// register
+	{"\\$(([ABCD][HLX])|([abcd][hlx]))",REGISTER,0},		// register
+	{"\\b[a-zA-Z_0-9]+" , MARK, 0},		// mark
+	{"!=",NEQ,3},						// not equal	
+	{"!",'!',6},						// not
+	{"\\*",'*',5},						// mul
+	{"/",'/',5},						// div
+	{"\\t+",NOTYPE,0},					// tabs
+	{"-",'-',4},						// sub
+	{"&&",AND,2},						// and
+	{">", '>', 3},      				// greater
+	{"<", '<', 3}, 						// lower
+	{">=", GE, 3},						// greater or equal
+	{"<=", LE, 3},						// lower or equal
+	{"\\|\\|",OR,1},					// or
+	{"\\(",'(',7},                      // left bracket   
+	{"\\)",')',7},                      // right bracket 
 	{" +",	NOTYPE},				// spaces
 	{"\\+", '+'},					// plus
 	{"==", EQ}						// equal
@@ -60,7 +80,7 @@ static bool make_token(char *e) {
 	int position = 0;
 	int i;
 	regmatch_t pmatch;
-	
+
 	nr_token = 0;
 
 	while(e[position] != '\0') {
