@@ -146,8 +146,9 @@ int dominant_operator(int l, int r){
 	int oper = l;
 	int count = 0;
 	for(i = l; i <= r; i ++){
-		if (tokens[i].type == NUMBER || tokens[i].type == HEX || tokens[i].type == REGISTER)
+		if (tokens[i].type == NUMBER || tokens[i].type == HEX || tokens[i].type == REGISTER){
 						continue;
+		}
 		if(tokens[i].type == '('){
 			count ++;
 		}
