@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-	NOTYPE = 256, EQ, NEQ, GE, LE,  AND, OR, MINUS, POINTOR, NUMBER, HEX, REGISTER, MARK,
+	NOTYPE = 256, EQ, NEQ, AND, OR, NEGATIVE, POINTOR, NUMBER, HEX, REGISTER, 
 	/* TODO: Add more token types */
 };
 
@@ -20,27 +20,25 @@ static struct rule {
 	/* TODO: Add more rules.
 	 * Pay attention to the precedence level of different rules.
 	 */
-	{"\\b[0-9]+\\b",NUMBER,0},			// number
-	{"\\b0[xX][0-9a-fA-F]+\\b",HEX,0},//hex
-	{"\\$[a-zA-Z]+",REGISTER,0},		// register
-	{"\\b[a-zA-Z_0-9]+" , MARK, 0},		// mark
-	{"!=",NEQ,3},						// not equal	
-	{"!",'!',6},						// not
-	{"\\*",'*',5},						// mul
-	{"/",'/',5},						// div
-	{"\\t+",NOTYPE,0},					// tabs
-	{"-",'-',4},						// sub
-	{"&&",AND,2},						// and
-	{">", '>', 3},      				// greater
-	{"<", '<', 3}, 						// lower
-	{">=", GE, 3},						// greater or equal
-	{"<=", LE, 3},						// lower or equal
-	{"\\|\\|",OR,1},					// or
-	{"\\(",'(',7},                      // left bracket   
-	{"\\)",')',7},                      // right bracket 
-	{" +",	NOTYPE},				// spaces
-	{"\\+", '+'},					// plus
-	{"==", EQ}						// equal
+	{"\\b[0-9]+\\b", NUMBER, 0},		// number
+	{"\\b0[xX][0-9a-fA-F]+\\b", HEX, 0},	//hex
+	{"\\$[a-zA-Z]+", REGISTER, 0},		// register
+	
+	{"\\+", '+', 4},	// plus
+	{"-", '-', 4},		// sub
+	{"\\*", '*', 5},	// mul
+	{"/", '/', 5},		// div
+	
+	{"==", EQ, 3},		// equal
+	{"!=", NEQ, 3},		// not equal	
+	{"&&", AND, 2},		// and
+	{"\\|\\|", OR, 1},	// or
+	{"!", '!', 6},		// not
+	
+	{"\\t+", NOTYPE, 0},	// tabs
+	{" +", NOTYPE, 0},	// spaces
+	{"\\(", '(', 7},	// left bracket   
+	{"\\)", ')', 7},	// right bracket 
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -216,15 +214,15 @@ uint32_t eval(int l, int r){
 	else {
 		int opre = dominant_operator (l,r);
 		//		printf ("op = %d\n",op);
-		if (l == opre || tokens[opre].type == '-' || tokens[opre].type == '-' || tokens[opre].type == '!')
+		if (l == opre || tokens[opre].type == POINTOR || tokens[opre].type == NEGATIVE || tokens[opre].type == '!')
 		{
 			uint32_t val = eval(l + 1,r);
 			//			printf ("val = %d\n",val);
 			switch (tokens[l].type)
 			{
-				case '*':
+				case POINTOR:
 					return swaddr_read (val,4);
-				case '-':
+				case NEGATIVE:
 					return -val;
 				case '!':
 					return !val;
@@ -267,6 +265,17 @@ uint32_t expr(char *e, bool *success) {
 	}
 
 	/* TODO: Insert codes to evaluate the expression. */
+	int i = 0;
+	for (i = 0;i < nr_token; i ++) {
+		if (tokens[i].type == '*' && (i == 0 || (tokens[i - 1].type != NUMBER && tokens[i - 1].type != HEX && tokens[i - 1].type != REGISTER && tokens[i - 1].type !=')'))) {
+			tokens[i].type = POINTOR;
+			tokens[i].priority = 6;
+		}
+		if (tokens[i].type == '-' && (i == 0 || (tokens[i - 1].type != NUMBER && tokens[i - 1].type != HEX && tokens[i - 1].type != REGISTER && tokens[i - 1].type !=')'))) {
+			tokens[i].type = NEGATIVE;
+			tokens[i].priority = 6;
+		}
+	}
 	panic("please implement me");
 	return 0;
 }
