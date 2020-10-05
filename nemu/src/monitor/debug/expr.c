@@ -165,7 +165,7 @@ int dominant_operator(int l, int r){
 uint32_t eval(int l, int r){
 	printf("in eval l = %d, r = %d\n", l ,r);
 	if (l > r){
-		Assert(l>r, "wrong border!\n");
+		Assert(0, "wrong border!\n");
 		return 1;
 	}
 	else if(l == r){
