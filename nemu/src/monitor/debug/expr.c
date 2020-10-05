@@ -161,6 +161,26 @@ int dominant_operator(int l, int r){
 	return 0;
 }
 
+uint32_t eval(int l, int r){
+	if (l > r){
+		Assert(l>r, "wrong border!\n");
+		return 1;
+	}
+	else if(l == r){
+		//single token
+		uint32_t num = 0;
+		if(tokens[l].type == NUMBER){
+			sscanf(tokens[l].str, "%d", &num);
+		}
+		else if(tokens[l].type == HEX){
+			sscanf(tokens[l].str, "%x", &num);
+		}
+		else if(tokens[l].type == REGISTER){
+
+		}
+	}
+return 0;
+}
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
 		*success = false;
