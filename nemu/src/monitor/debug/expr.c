@@ -147,7 +147,7 @@ int dominant_operator(int l, int r){
 	int count = 0;
 	for(i = l; i <= r; i ++){
 		if (tokens[i].type == NUMBER || tokens[i].type == HEX || tokens[i].type == REGISTER){
-						continue;
+			continue;
 		}
 		if(tokens[i].type == '('){
 			count ++;
@@ -172,22 +172,22 @@ uint32_t eval(int l, int r){
 		return 1;
 	}
 	else if(l == r){
-	//	printf("in eval ==\n");
+		//	printf("in eval ==\n");
 		//single token
 		uint32_t num = 0;
 		if(tokens[l].type == NUMBER){
-			
-	//	printf("in eval number\n");
+
+			//	printf("in eval number\n");
 			sscanf(tokens[l].str, "%d", &num);
 		}
 		else if(tokens[l].type == HEX){
-	//	printf("in eval hex\n");
+			//	printf("in eval hex\n");
 			sscanf(tokens[l].str, "%x", &num);
 		}
 		else if(tokens[l].type == REGISTER){
 			if(strlen(tokens[l].str) == 3){
 
-//		printf("in eval 3R\n");
+				//		printf("in eval 3R\n");
 				//32bits register
 				int i = 0;
 				for(; i < 8; i ++){
@@ -205,7 +205,7 @@ uint32_t eval(int l, int r){
 			}
 			else if (strlen (tokens[l].str) == 2) {
 
-	//	printf("in eval 2R\n");
+				//	printf("in eval 2R\n");
 				if (tokens[l].str[1] == 'x' || tokens[l].str[1] == 'p' || tokens[l].str[1] == 'i') {
 					int i;
 					for (i = R_AX; i <= R_DI; i ++)
@@ -227,8 +227,8 @@ uint32_t eval(int l, int r){
 	else if (check_parentheses (l, r) == true)
 		return eval (l + 1, r - 1);
 	else {
-		
-	//	printf("in eval l < r\n");
+
+		//	printf("in eval l < r\n");
 		int opre = dominant_operator (l,r);
 		if (l == opre || tokens[opre].type == POINTOR || tokens[opre].type == NEGATIVE || tokens[opre].type == '!')
 		{
