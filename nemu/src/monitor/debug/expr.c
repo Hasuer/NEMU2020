@@ -257,7 +257,7 @@ uint32_t eval(int l, int r){
 				break;
 		}
 	}
-	return -1;
+	return -1234234;
 }
 uint32_t expr(char *e, bool *success) {
 	printf("in expr\n");
