@@ -118,6 +118,21 @@ static int cmd_x(char* args){
 	return 0;
 }
 
+static int cmd_p(char* args){
+	char* token = strtok(args, " ");
+	if(token == NULL){
+		printf("just one parameter.Mismatch the format [p EXPR]\n");
+		return -1;
+	}
+	bool success = true;
+	int result = expr(args, &success);
+	if(!success)
+		printf("invalid ecpression!\n");
+	else 
+		printf("Answer is %d", result);
+	return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -133,6 +148,7 @@ static struct {
 	{"si", "Single Step. si [N] for exectuating N steps, the default N is 1.", cmd_Sstep},
 	{"info", "[info r] to print the register status, [info w] to print the watchpoint info", cmd_info},
 	{"x", "[x N EXPR] to scan the memory", cmd_x},
+	{"p", "[p EXPR] to calculate the expression.\n", cmd_p},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
