@@ -125,7 +125,7 @@ static bool make_token(char *e) {
 }
 //check the brackets
 bool check_parentheses(int l ,int r){
-	printf("in check_paratheses\n");
+	printf("in check_paratheses, l = %d, n = %d\n", l , r);
 	int i,tag = 0;
 	if(tokens[l].type != '(' || tokens[r].type != ')') return false;  
 	for(i = l ; i <= r ; i ++){    
@@ -139,7 +139,7 @@ bool check_parentheses(int l ,int r){
 
 //dominant_oper, return the position of the oper in tokens[]
 int dominant_operator(int l, int r){
-	printf("in dominant_opre\n");
+	printf("in dominant_opre, l = %d, r = %d\n", l ,r);
 	//the operator with the min number is the dominant_oper
 	int i ;
 	int min_priority = 10;
@@ -184,7 +184,7 @@ uint32_t eval(int l, int r){
 		else if(tokens[l].type == REGISTER){
 			if(strlen(tokens[l].str) == 3){
 
-		printf("in eval 3R\n");
+//		printf("in eval 3R\n");
 				//32bits register
 				int i = 0;
 				for(; i < 8; i ++){
@@ -195,7 +195,7 @@ uint32_t eval(int l, int r){
 					if(strcmp(tokens[l].str, "eip") == 0)
 						num = cpu.eip;
 					else 
-						Assert(1, "register not exist!\n");
+						Assert(0, "register not exist!\n");
 				}
 				else
 					num = reg_l(i);
@@ -216,7 +216,7 @@ uint32_t eval(int l, int r){
 					num = reg_b(i);
 				}
 				else
-					Assert(1, "register not exist!\n");
+					Assert(0, "register not exist!\n");
 			}
 		}
 		return num;
@@ -239,7 +239,7 @@ uint32_t eval(int l, int r){
 				case '!':
 					return !val;
 				default :
-					Assert (1,"wrong expression in case 'l < r'\n");
+					Assert (0,"wrong expression in case 'l < r'\n");
 			} 
 		}
 
