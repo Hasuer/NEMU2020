@@ -23,18 +23,18 @@ static struct rule {
 	{"\\b[0-9]+\\b", NUMBER, 0},		// number
 	{"\\b0[xX][0-9a-fA-F]+\\b", HEX, 0},	//hex
 	{"\\$[a-zA-Z]+", REGISTER, 0},		// register
-	
+
 	{"\\+", '+', 4},	// plus
 	{"-", '-', 4},		// sub
 	{"\\*", '*', 5},	// mul
 	{"/", '/', 5},		// div
-	
+
 	{"==", EQ, 3},		// equal
 	{"!=", NEQ, 3},		// not equal	
 	{"&&", AND, 2},		// and
 	{"\\|\\|", OR, 1},	// or
 	{"!", '!', 6},		// not
-	
+
 	{"\\t+", NOTYPE, 0},	// tabs
 	{" +", NOTYPE, 0},	// spaces
 	{"\\(", '(', 7},	// left bracket   
@@ -169,16 +169,22 @@ uint32_t eval(int l, int r){
 		return 1;
 	}
 	else if(l == r){
+		printf("in eval ==\n");
 		//single token
 		uint32_t num = 0;
 		if(tokens[l].type == NUMBER){
+			
+		printf("in eval number\n");
 			sscanf(tokens[l].str, "%d", &num);
 		}
 		else if(tokens[l].type == HEX){
+		printf("in eval hex\n");
 			sscanf(tokens[l].str, "%x", &num);
 		}
 		else if(tokens[l].type == REGISTER){
 			if(strlen(tokens[l].str) == 3){
+
+		printf("in eval 3R\n");
 				//32bits register
 				int i = 0;
 				for(; i < 8; i ++){
@@ -195,6 +201,8 @@ uint32_t eval(int l, int r){
 					num = reg_l(i);
 			}
 			else if (strlen (tokens[l].str) == 2) {
+
+		printf("in eval 2R\n");
 				if (tokens[l].str[1] == 'x' || tokens[l].str[1] == 'p' || tokens[l].str[1] == 'i') {
 					int i;
 					for (i = R_AX; i <= R_DI; i ++)
@@ -216,6 +224,8 @@ uint32_t eval(int l, int r){
 	else if (check_parentheses (l, r) == true)
 		return eval (l + 1, r - 1);
 	else {
+		
+		printf("in eval l < r\n");
 		int opre = dominant_operator (l,r);
 		if (l == opre || tokens[opre].type == POINTOR || tokens[opre].type == NEGATIVE || tokens[opre].type == '!')
 		{
