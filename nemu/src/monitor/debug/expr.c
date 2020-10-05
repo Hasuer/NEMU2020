@@ -276,6 +276,5 @@ uint32_t expr(char *e, bool *success) {
 			tokens[i].priority = 6;
 		}
 	}
-	panic("please implement me");
-	return 0;
+	return eval(0, nr_token - 1);
 }
