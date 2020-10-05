@@ -159,7 +159,7 @@ int dominant_operator(int l, int r){
 			oper = i;
 		}
 	}
-	return 0;
+	return oper;
 }
 
 uint32_t eval(int l, int r){
