@@ -176,10 +176,18 @@ uint32_t eval(int l, int r){
 			sscanf(tokens[l].str, "%x", &num);
 		}
 		else if(tokens[l].type == REGISTER){
+			if(strlen(tokens[l].str) == 3){
+				//32bits register
+				int i = 0;
+				for(; i < 8; i ++){
+					if (strcmp(tokens[l].str, regsl[i]) == 0)
+						break;
+				}
 
+			}
 		}
 	}
-return 0;
+	return 0;
 }
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
