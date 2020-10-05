@@ -209,8 +209,56 @@ uint32_t eval(int l, int r){
 					Assert(1, "register not exist!\n");
 			}
 		}
+		return num;
 	}
-	return 0;
+	else if (check_parentheses (l, r) == true)
+		return eval (l + 1, r - 1);
+	else {
+		int opre = dominant_operator (l,r);
+		//		printf ("op = %d\n",op);
+		if (l == opre || tokens[opre].type == '-' || tokens[opre].type == '-' || tokens[opre].type == '!')
+		{
+			uint32_t val = eval(l + 1,r);
+			//			printf ("val = %d\n",val);
+			switch (tokens[l].type)
+			{
+				case '*':
+					return swaddr_read (val,4);
+				case '-':
+					return -val;
+				case '!':
+					return !val;
+				default :
+					Assert (1,"wrong expression in case 'l < r'\n");
+			} 
+		}
+
+		uint32_t val1 = eval(l, opre - 1);
+		uint32_t val2 = eval(opre + 1, r);
+		//		printf ("1 = %d,2 = %d\n",val1,val2);
+		switch (tokens[opre].type)
+		{
+			case '+':
+				return val1 + val2;
+			case '-':
+				return val1 - val2;
+			case '*':
+				return val1 * val2;
+			case '/':
+				return val1 / val2;
+			case EQ:
+				return val1 == val2;
+			case NEQ:
+				return val1 != val2;
+			case AND:
+				return val1 && val2;
+			case OR:
+				return val1 || val2;
+			default:
+				break;
+		}
+	}
+	return -1;
 }
 uint32_t expr(char *e, bool *success) {
 	if(!make_token(e)) {
