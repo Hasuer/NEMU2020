@@ -72,7 +72,7 @@ Token tokens[32];
 int nr_token;
 
 static bool make_token(char *e) {
-	printf("in make token\n");
+//	printf("in make token\n");
 	int position = 0;
 	int i;
 	regmatch_t pmatch;
@@ -125,7 +125,7 @@ static bool make_token(char *e) {
 }
 //check the brackets
 bool check_parentheses(int l ,int r){
-	printf("in check_paratheses, l = %d, n = %d\n", l , r);
+//	printf("in check_paratheses, l = %d, n = %d\n", l , r);
 	int i,tag = 0;
 	if(tokens[l].type != '(' || tokens[r].type != ')') return false;  
 	for(i = l ; i <= r ; i ++){    
@@ -139,7 +139,7 @@ bool check_parentheses(int l ,int r){
 
 //dominant_oper, return the position of the oper in tokens[]
 int dominant_operator(int l, int r){
-	printf("in dominant_opre, l = %d, r = %d\n", l ,r);
+//	printf("in dominant_opre, l = %d, r = %d\n", l ,r);
 	//the operator with the min number is the dominant_oper
 	int i ;
 	int min_priority = 10;
@@ -166,7 +166,7 @@ int dominant_operator(int l, int r){
 }
 
 uint32_t eval(int l, int r){
-	printf("in eval l = %d, r = %d\n", l ,r);
+//	printf("in eval l = %d, r = %d\n", l ,r);
 	if (l > r){
 		Assert(0, "wrong border!\n");
 		return 1;
