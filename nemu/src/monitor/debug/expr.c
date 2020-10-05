@@ -213,11 +213,9 @@ uint32_t eval(int l, int r){
 		return eval (l + 1, r - 1);
 	else {
 		int opre = dominant_operator (l,r);
-		//		printf ("op = %d\n",op);
 		if (l == opre || tokens[opre].type == POINTOR || tokens[opre].type == NEGATIVE || tokens[opre].type == '!')
 		{
 			uint32_t val = eval(l + 1,r);
-			//			printf ("val = %d\n",val);
 			switch (tokens[l].type)
 			{
 				case POINTOR:
@@ -233,7 +231,6 @@ uint32_t eval(int l, int r){
 
 		uint32_t val1 = eval(l, opre - 1);
 		uint32_t val2 = eval(opre + 1, r);
-		//		printf ("1 = %d,2 = %d\n",val1,val2);
 		switch (tokens[opre].type)
 		{
 			case '+':

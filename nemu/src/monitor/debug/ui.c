@@ -119,17 +119,17 @@ static int cmd_x(char* args){
 }
 
 static int cmd_p(char* args){
-	char* token = strtok(args, " ");
-	if(token == NULL){
-		printf("just one parameter.Mismatch the format [p EXPR]\n");
-		return -1;
-	}
+	//char* token = strtok(args, " ");
+//	if(token == NULL){
+//		printf("just one parameter.Mismatch the format [p EXPR]\n");
+//		return -1;
+//	}
 	bool success = true;
-	int result = expr(args, &success);
+	uint32_t result = expr(args, &success);
 	if(!success)
 		printf("invalid ecpression!\n");
 	else 
-		printf("Answer is %d", result);
+		printf("Answer is %d\n", result);
 	return 0;
 }
 
