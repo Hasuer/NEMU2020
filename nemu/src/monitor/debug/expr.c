@@ -183,7 +183,30 @@ uint32_t eval(int l, int r){
 					if (strcmp(tokens[l].str, regsl[i]) == 0)
 						break;
 				}
-
+				if(i == 8){
+					if(strcmp(tokens[l].str, "eip") == 0)
+						num = cpu.eip;
+					else 
+						Assert(1, "register not exist!\n");
+				}
+				else
+					num = reg_l(i);
+			}
+			else if (strlen (tokens[l].str) == 2) {
+				if (tokens[l].str[1] == 'x' || tokens[l].str[1] == 'p' || tokens[l].str[1] == 'i') {
+					int i;
+					for (i = R_AX; i <= R_DI; i ++)
+						if (strcmp (tokens[l].str,regsw[i]) == 0)break;
+					num = reg_w(i);
+				}
+				else if (tokens[l].str[1] == 'l' || tokens[l].str[1] == 'h') {
+					int i;
+					for (i = R_AL; i <= R_BH; i ++)
+						if (strcmp (tokens[l].str,regsb[i]) == 0)break;
+					num = reg_b(i);
+				}
+				else
+					Assert(1, "register not exist!\n");
 			}
 		}
 	}
