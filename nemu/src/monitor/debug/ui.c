@@ -133,6 +133,14 @@ static int cmd_p(char* args){
 	return 0;
 }
 
+static int cmd_w(char* args){
+	return 0;
+}
+
+static int cmd_d(char* args){
+	return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -149,6 +157,9 @@ static struct {
 	{"info", "[info r] to print the register status, [info w] to print the watchpoint info", cmd_info},
 	{"x", "[x N EXPR] to scan the memory", cmd_x},
 	{"p", "[p EXPR] to calculate the expression.\n", cmd_p},
+	{"w", "[w EXPR] to set the watchpoint\n", cmd_w},
+	{"d", "[d N] to delete the watchc point\n", cmd_d},
+//	{"bt", "print the stack", cmd_bt},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
