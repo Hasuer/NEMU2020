@@ -21,15 +21,43 @@ void init_wp_pool() {
 /* TODO: Implement the functionality of watchpoint */
 
 WP* new_wp(char* args){
-	 if (free_ == NULL) {
-		     printf("there are no free watchpoints.\n");
-		         return NULL;
-			   }
-	   WP *p = free_;
-	     free_ = free_->next;
+	if (free_ == NULL) {
+		printf("there are no free watchpoints.\n");
+		return NULL;
+	}
+	WP *p = free_;
+	free_ = free_->next;
 
-	       p->next = head;
-	         head = p;
+	p->next = head;
+	head = p;
 
-		   return p;
+	return p;
+}
+
+void free_wp(int n){
+	WP* p;
+	p = head;
+	bool found = false;
+	if (head->NO == n){
+		head = head->next;
+		p->next = free_;
+		free_ = p;
+		found = true;
+	}
+	else{
+		for(p = head; p != NULL; p = p->next){
+			if(p->NO == n){
+				WP* q = p;
+				p = p->next;
+				q->next = free_;
+				free_ = q;
+				found = true;
+				break;
+			}
+		}
+		
+	}
+	if(!found){
+		printf("no watchpoint with index '%d' is used", n);
+	}
 }
