@@ -125,11 +125,11 @@ static int cmd_p(char* args){
 char* token = strtok(args, " ");
 	if(token == NULL){
 		printf("just one parameter.Mismatch the format [p EXPR]\n");
-		return -1;
+		return 0;
 	}
 	if(strtok(NULL, " ") != NULL){
 		printf("too many parameters.Mismatvh the foramt [p EXPR\n]");
-		return -1;
+		return 0;
 	}
 	bool success = true;
 	uint32_t result = expr(args, &success);
@@ -144,11 +144,11 @@ static int cmd_setwp(char* args){
 char* token = strtok(args, " ");
 	if(token == NULL){
 		printf("just one parameter.Mismatch the format [w EXPR]\n");
-		return 1;
+		return 0;
 	}
 	if(strtok(NULL, " ") != NULL){
 		printf("too many parameters.Mismatvh the foramt [w EXPR\n]");
-		return -1;
+		return 0;
 	}
 	printf("in setwp token = '%d'", *token);
 	new_wp(token);
