@@ -169,7 +169,7 @@ static int cmd_d(char* args){
 ;
 		return 0;
 	}
-	if(strtok(NULL, " ") == NULL){
+	if(strtok(NULL, " ") != NULL){
 		printf("Too many parameters.Mismatch the format [d N]\n");
 	}
 	int n = 0;
@@ -194,9 +194,9 @@ static struct {
 	{"si", "Single Step. si [N] for exectuating N steps, the default N is 1.", cmd_Sstep},
 	{"info", "[info r] to print the register status, [info w] to print the watchpoint info", cmd_info},
 	{"x", "[x N EXPR] to scan the memory", cmd_x},
-	{"p", "[p EXPR] to calculate the expression.\n", cmd_p},
-	{"w", "[w EXPR] to set the watchpoint\n", cmd_setwp},
-	{"d", "[d N] to delete the watchpoint\n", cmd_d},
+	{"p", "[p EXPR] to calculate the expression.", cmd_p},
+	{"w", "[w EXPR] to set the watchpoint.", cmd_setwp},
+	{"d", "[d N] to delete the watchpoint.", cmd_d},
 	//	{"bt", "print the stack", cmd_bt},
 };
 
