@@ -155,10 +155,10 @@ static int cmd_setwp(char* args){
 	bool success = true;
 //	printf ("Watchpoint %d: %s\n",temp->NO,args);
 	temp->oldVal = expr (args,&success);
-//	strcpy (temp->expr,args);
+	strcpy (temp->expr,args);// store the expression.
 	if (!success)
 		Assert (0,"Set watchpoint failed\n");
-	printf ("Watchpoint set! EXPR: %s, NO: %d, Value : %d\n", args, temp->NO, temp->oldVal);
+	printf ("Watchpoint set! EXPR: %s, NO: %d, Value : %d\n", temp->expr, temp->NO, temp->oldVal);
 	return 0;
 }
 
@@ -175,7 +175,7 @@ static int cmd_d(char* args){
 	int n = 0;
 	sscanf(args, "%d", &n);
 //	printf("in del wp, n = %d\n", n);
-	free_wp(n);
+//	free_wp(n);
 	return 0;
 }
 
