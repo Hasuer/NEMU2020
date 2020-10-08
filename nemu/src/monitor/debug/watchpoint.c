@@ -79,3 +79,22 @@ void print_wp()
 		f = f->next;
 	}
 }
+
+bool check_wp(){
+	WP* p = head;
+	bool success = true;
+	for(p = head; p != NULL; p = p->next){
+		uint32_t temp = expr(p->expr, &success);
+		if(!success){
+			Assert(0,"wrong in check_wp()\n");
+		}
+		if(temp != p->oldVal){
+			printf ("Value of watchpoint %d: %s has changed!\n", p->NO, p->expr);
+			printf ("Old value = %d has changed to %d\n", p->oldVal, temp);
+			p->oldVal = temp;
+			return true;
+		}
+	}
+	return false;
+}
+
