@@ -81,6 +81,7 @@ void print_wp()
 }
 
 bool check_wp(){
+	printf("in check_wp\n");
 	WP* p = head;
 	bool success = true;
 	for(p = head; p != NULL; p = p->next){
