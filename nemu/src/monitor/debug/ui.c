@@ -165,8 +165,16 @@ static int cmd_setwp(char* args){
 static int cmd_d(char* args){
 	char* token = strtok(args, " ");
 	if(token == NULL){
-		Assert(0,"only one parameter");
+		printf("Only one paramater.Mismatch the format [d N]\n")
+;
+		return 0;
 	}
+	if(strtok(NULL, " ") == NULL){
+		printf("Too many parameters.Mismatch the format [d N]\n");
+	}
+	int n = 0;
+	sscanf(args, "%d", &n);
+	printf("in del wp, n = %d\n", n);
 //	free_wp(n);
 	return 0;
 }
