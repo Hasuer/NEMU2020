@@ -163,6 +163,11 @@ static int cmd_setwp(char* args){
 }
 
 static int cmd_d(char* args){
+	char* token = strtok(args, " ");
+	if(token == NULL){
+		Assert(0,"only one parameter");
+	}
+//	free_wp(n);
 	return 0;
 }
 
@@ -183,7 +188,7 @@ static struct {
 	{"x", "[x N EXPR] to scan the memory", cmd_x},
 	{"p", "[p EXPR] to calculate the expression.\n", cmd_p},
 	{"w", "[w EXPR] to set the watchpoint\n", cmd_setwp},
-	{"d", "[d N] to delete the watchc point\n", cmd_d},
+	{"d", "[d N] to delete the watchpoint\n", cmd_d},
 	//	{"bt", "print the stack", cmd_bt},
 };
 
