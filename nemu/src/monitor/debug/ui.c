@@ -147,10 +147,13 @@ char* token = strtok(args, " ");
 		return 0;
 	}
 	if(strtok(NULL, " ") != NULL){
-		printf("too many parameters.Mismatvh the foramt [w EXPR\n]");
+		printf("too many parameters.Mismatvh the foramt [w EXPR]\n");
 		return 0;
 	}
-	printf("in setwp token = '%d'", *token);
+	int n;
+	sscanf(token, "%d", &n);
+	printf("int cmd_setwp n = %d", n);
+	printf("in setwp token = %d", *token);
 	new_wp(token);
 	return 0;
 }
