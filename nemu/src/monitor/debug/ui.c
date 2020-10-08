@@ -174,8 +174,8 @@ static int cmd_d(char* args){
 	}
 	int n = 0;
 	sscanf(args, "%d", &n);
-	printf("in del wp, n = %d\n", n);
-//	free_wp(n);
+//	printf("in del wp, n = %d\n", n);
+	free_wp(n);
 	return 0;
 }
 
