@@ -35,39 +35,39 @@ WP* new_wp(){
 }
 
 void free_wp(int n){
-	WP* p;
-	p = head;
-	bool found = false;
-	if (head->NO == n){
-		head = head->next;
-		p->next = free_;
-		free_ = p;
-		found = true;
+	if(n >= 0 && n < NR_WP){
+		WP* p;
+		p = head;
+		bool found = false;
+		if (head->NO == n){
+			head = head->next;
+			p->next = free_;
+			free_ = p;
+			found = true;
+		}
+		else{
+			for(p = head; p != NULL; p = p->next){
+				if(p->NO == n){
+					WP* q = p;
+					p = p->next;
+					q->next = free_;
+					free_ = q;
+					found = true;
+					break;
+				}
+			}
+
+		}
+		if(!found){
+			printf("no watchpoint with index '%d' is used", n);
+		}
 	}
 	else{
-		for(p = head; p != NULL; p = p->next){
-			if(p->NO == n){
-				WP* q = p;
-				p = p->next;
-				q->next = free_;
-				free_ = q;
-				found = true;
-				break;
-			}
-		}
 
-	}
-	if(!found){
-		printf("no watchpoint with index '%d' is used", n);
-	}
-}
-
-void del_wp(int n) {
-	if(n >= 0 && n < NR_WP)
-		free_wp(n);
-	else
 		printf("Index %d out of range!(0<=index<%d)\n", n, NR_WP);
+	}
 }
+
 
 void print_wp()
 {
