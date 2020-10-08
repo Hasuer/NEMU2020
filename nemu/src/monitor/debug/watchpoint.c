@@ -59,7 +59,7 @@ void free_wp(int n){
 
 		}
 		if(!found){
-			printf("no watchpoint with index '%d' is used", n);
+			printf("no watchpoint with index '%d' is used\n", n);
 		}
 	}
 	else{
@@ -75,7 +75,7 @@ void print_wp()
 	f=head;
 	while (f!=NULL)
 	{
-		printf ("Watchpoint %d:",f->NO);
+		printf ("Watchpoint %d:, EXPR = %s, oldVal = %d \n",f->NO, f->expr, f->oldVal);
 		f = f->next;
 	}
 }
