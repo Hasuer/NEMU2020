@@ -55,9 +55,27 @@ void free_wp(int n){
 				break;
 			}
 		}
-		
+
 	}
 	if(!found){
 		printf("no watchpoint with index '%d' is used", n);
+	}
+}
+
+void del_wp(int n) {
+	if(n >= 0 && n < NR_WP)
+		free_wp(n);
+	else
+		printf("Index %d out of range!(0<=index<%d)\n", n, NR_WP);
+}
+
+void print_wp()
+{
+	WP *f;
+	f=head;
+	while (f!=NULL)
+	{
+		printf ("Watchpoint %d:",f->NO);
+		f = f->next;
 	}
 }

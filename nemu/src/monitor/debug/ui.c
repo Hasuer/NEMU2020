@@ -79,6 +79,9 @@ static int cmd_info(char* args){
 		}
 		printf("eip        0x%x\n",  cpu.eip);
 	}
+	else if (strcmp(token, "w") == 0){
+		print_wp();
+	}
 	else{
 		printf("wrong parameter!\n");
 		return 0;
@@ -119,11 +122,15 @@ static int cmd_x(char* args){
 }
 
 static int cmd_p(char* args){
-	//char* token = strtok(args, " ");
-//	if(token == NULL){
-//		printf("just one parameter.Mismatch the format [p EXPR]\n");
-//		return -1;
-//	}
+char* token = strtok(args, " ");
+	if(token == NULL){
+		printf("just one parameter.Mismatch the format [p EXPR]\n");
+		return -1;
+	}
+	if(strtok(NULL, " ") != NULL){
+		printf("too many parameters.Mismatvh the foramt [p EXPR\n]");
+		return -1;
+	}
 	bool success = true;
 	uint32_t result = expr(args, &success);
 	if(!success)
@@ -133,7 +140,18 @@ static int cmd_p(char* args){
 	return 0;
 }
 
-static int cmd_w(char* args){
+static int cmd_setwp(char* args){
+char* token = strtok(args, " ");
+	if(token == NULL){
+		printf("just one parameter.Mismatch the format [w EXPR]\n");
+		return -1;
+	}
+	if(strtok(NULL, " ") != NULL){
+		printf("too many parameters.Mismatvh the foramt [w EXPR\n]");
+		return -1;
+	}
+	printf("in setwp token = '%d'", *token);
+	new_wp(token);
 	return 0;
 }
 
@@ -157,9 +175,9 @@ static struct {
 	{"info", "[info r] to print the register status, [info w] to print the watchpoint info", cmd_info},
 	{"x", "[x N EXPR] to scan the memory", cmd_x},
 	{"p", "[p EXPR] to calculate the expression.\n", cmd_p},
-	{"w", "[w EXPR] to set the watchpoint\n", cmd_w},
+	{"w", "[w EXPR] to set the watchpoint\n", cmd_setwp},
 	{"d", "[d N] to delete the watchc point\n", cmd_d},
-//	{"bt", "print the stack", cmd_bt},
+	//	{"bt", "print the stack", cmd_bt},
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
