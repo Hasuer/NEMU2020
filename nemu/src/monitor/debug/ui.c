@@ -152,11 +152,11 @@ static int cmd_setwp(char* args){
 	}
 	// begin set new watchpoint
 	WP* temp = new_wp();
-	bool suc;
+	bool success = true;
 //	printf ("Watchpoint %d: %s\n",temp->NO,args);
-	temp->oldVal = expr (args,&suc);
+	temp->oldVal = expr (args,&success);
 //	strcpy (temp->expr,args);
-	if (!suc)
+	if (!success)
 		Assert (0,"Set watchpoint failed\n");
 	printf ("Watchpoint set! EXPR: %s, NO: %d, Value : %d\n", args, temp->NO, temp->oldVal);
 	return 0;
