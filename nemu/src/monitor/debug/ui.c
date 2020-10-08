@@ -63,11 +63,11 @@ static int cmd_Sstep(char* args){
 static int cmd_info(char* args){
 	char* token = strtok(args," ");
 	if (token == NULL){
-		printf("just one parameter. Mismatch the format [info SUNSMD]\n");
+		printf("Just one parameter. Mismatch the format [info SUNSMD]\n");
 		return 0;
 	}
 	if (strtok(NULL, " ") != NULL){
-		printf("too many parameters. Mismatch the format\n");
+		printf("Too many parameters. Mismatch the format\n");
 		return 0;
 	}	
 	if (strcmp(token,"r") == 0){
@@ -83,7 +83,7 @@ static int cmd_info(char* args){
 		print_wp();
 	}
 	else{
-		printf("wrong parameter!\n");
+		printf("Wrong parameter!\n");
 		return 0;
 	}
 	return 0;
@@ -93,18 +93,18 @@ static int cmd_x(char* args){
 	char* arg = strtok(args," ");
 	if(arg == NULL){
 		//test if there is only one parameter
-		printf("only one parameter. mismatch the format! [x N EXPR] \n");
+		printf("Only one parameter. mismatch the format! [x N EXPR] \n");
 		return 1;
 	}
 	char* EXPR = strtok(NULL, " "); // get EXPR
 	if(EXPR == NULL){
 		// test if there is only two parameter
-		printf("only two parameter. mismatch the format! [X N EXPR]\n");
+		printf("Only two parameter. mismatch the format! [X N EXPR]\n");
 		return 0;
 	}
 	if(strtok(NULL," ")!=NULL){
 		//test if there are more than three  parameter
-		printf("to many parameters. mismatch the format! [x N EXPR] \n");
+		printf("Too many parameters. mismatch the format! [x N EXPR] \n");
 		return 0;
 	}
 	int n;
@@ -122,39 +122,43 @@ static int cmd_x(char* args){
 }
 
 static int cmd_p(char* args){
-char* token = strtok(args, " ");
+	char* token = strtok(args, " ");
 	if(token == NULL){
-		printf("just one parameter.Mismatch the format [p EXPR]\n");
+		printf("Just one parameter.Mismatch the format [p EXPR]\n");
 		return 0;
 	}
 	if(strtok(NULL, " ") != NULL){
-		printf("too many parameters.Mismatvh the foramt [p EXPR\n]");
+		printf("Too many parameters.Mismatvh the foramt [p EXPR\n]");
 		return 0;
 	}
 	bool success = true;
 	uint32_t result = expr(args, &success);
 	if(!success)
-		printf("invalid ecpression!\n");
+		printf("Invalid ecpression!\n");
 	else 
 		printf("Answer is %d\n", result);
 	return 0;
 }
 
 static int cmd_setwp(char* args){
-char* token = strtok(args, " ");
+	char* token = strtok(args, " ");
 	if(token == NULL){
-		printf("just one parameter.Mismatch the format [w EXPR]\n");
+		printf("Just one parameter.Mismatch the format [w EXPR]\n");
 		return 0;
 	}
 	if(strtok(NULL, " ") != NULL){
-		printf("too many parameters.Mismatvh the foramt [w EXPR]\n");
+		printf("Too many parameters.Mismatvh the foramt [w EXPR]\n");
 		return 0;
 	}
-	int n;
-	sscanf(token, "%d", &n);
-	printf("int cmd_setwp n = %d", n);
-	printf("in setwp token = %d", *token);
-	new_wp(token);
+	// begin set new watchpoint
+	WP* temp = new_wp();
+	bool suc;
+//	printf ("Watchpoint %d: %s\n",temp->NO,args);
+	temp->oldVal = expr (args,&suc);
+//	strcpy (temp->expr,args);
+	if (!suc)
+		Assert (0,"Set watchpoint failed\n");
+	printf ("Watchpoint set! EXPR: %s, NO: %d, Value : %d\n", args, temp->NO, temp->oldVal);
 	return 0;
 }
 
