@@ -144,7 +144,7 @@ static int cmd_setwp(char* args){
 char* token = strtok(args, " ");
 	if(token == NULL){
 		printf("just one parameter.Mismatch the format [w EXPR]\n");
-		return -1;
+		return 1;
 	}
 	if(strtok(NULL, " ") != NULL){
 		printf("too many parameters.Mismatvh the foramt [w EXPR\n]");
