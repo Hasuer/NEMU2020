@@ -46,10 +46,10 @@ void free_wp(int n){
 			found = true;
 		}
 		else{
-			for(p = head; p != NULL; p = p->next){
-				if(p->NO == n){
-					WP* q = p;
-					p = p->next;
+			for(p = head; p->next != NULL; p = p->next){
+				if(p->next->NO == n){
+					WP* q = p->next;
+					p->next = p->next->next;
 					q->next = free_;
 					free_ = q;
 					found = true;
